@@ -15,7 +15,7 @@ const MANIFEST_URL = `https://raw.githubusercontent.com/${MANIFEST_REPO_OWNER}/$
 
 type InstallationType = 'dist' | 'manifest';
 
-const golangDownloadUrl = 'https://go.dev/dl/?mode=json&include=all';
+const GOLANG_DOWNLOAD_URL = 'https://go.dev/dl/?mode=json&include=all';
 
 export interface IGoVersionFile {
   filename: string;
@@ -409,7 +409,7 @@ export async function findMatch(
   let match: IGoVersion | undefined;
 
   const candidates: IGoVersion[] | null = await module.exports.getVersionsDist(
-    golangDownloadUrl
+    GOLANG_DOWNLOAD_URL
   );
   if (!candidates) {
     throw new Error(`golang download url did not return results`);
@@ -507,7 +507,7 @@ async function resolveStableVersionDist(versionSpec: string, arch: string) {
   const archFilter = sys.getArch(arch);
   const platFilter = sys.getPlatform();
   const candidates: IGoVersion[] | null = await module.exports.getVersionsDist(
-    golangDownloadUrl
+    GOLANG_DOWNLOAD_URL
   );
   if (!candidates) {
     throw new Error(`golang download url did not return results`);
